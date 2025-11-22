@@ -1,0 +1,48 @@
+# Archivos de .gitignore para ASP.NET Core
+
+# Directorios de Build
+[Bb]in/
+[Oo]bj/
+# Directorio de paquetes de NuGet (puede variar)
+.vs/
+.vs*/
+
+# Paquetes
+*.nupkg
+# Directorio de NuGet
+packages/
+# Archivos de caché del paquete
+.nuget/
+# Archivo de restauración de paquetes (dotnet restore)
+project.assets.json
+
+# Archivos de la IDE (Visual Studio)
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# Directorios de usuario de Visual Studio
+.idea/
+.vscode/
+
+# Archivos de compilación de Resharper/JetBrains
+*.DotSettings.user
+
+# Archivos de base de datos local (SQL Server LocalDB)
+*.mdf
+*.ldf
+
+# Logs y datos de depuración
+*.log
+*.bak
+*.ncb
+*.sdf
+*.vshost.*
+
+# Configuración de ambiente (¡IMPORTANTE!)
+# Normalmente los archivos .json se rastrean, pero si añades secretos
+# en el ambiente de Desarrollo, puedes ignorar el de desarrollo,
+# o incluir el .Development.json y simplemente tener cuidado.
+# Si tienes un archivo que **solo** contiene secretos, ignóralo.
+# Ejemplo:
+# appsettings.Development.json
