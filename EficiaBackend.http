@@ -1,0 +1,6 @@
+@EficiaBackend_HostAddress = http://localhost:5116
+
+GET {{EficiaBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
