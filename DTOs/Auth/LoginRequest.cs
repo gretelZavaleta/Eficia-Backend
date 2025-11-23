@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace EficiaBackend.Dtos.Auth;
+namespace EficiaBackend.DTOs.Auth;
 
 public class LoginRequest
 {

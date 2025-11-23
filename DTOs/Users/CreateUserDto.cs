@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace EficiaBackend.Dtos.Users;
+namespace EficiaBackend.DTOs.Users;
 
 public class CreateUserDto
 {
