@@ -1,12 +1,14 @@
 using EficiaBackend.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
 using EficiaBackend.Services;
 using EficiaBackend.Services.Interfaces;
 using EficiaBackend.Repositories;
 using EficiaBackend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
