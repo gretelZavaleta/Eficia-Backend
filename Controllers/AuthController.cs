@@ -15,8 +15,6 @@ namespace EficiaBackend.Controllers
             _authService = authService;
         }
 
-
-        // POST: /auth/register
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -27,13 +25,17 @@ namespace EficiaBackend.Controllers
 
             return Ok(new
             {
-                message = "Usuario registrado correctamente",
-                user = result.User
+                message = result.Message,
+                token = result.Token,
+                user = new
+                {
+                    id = result.UserId,
+                    name = result.Name,
+                    email = result.Email
+                }
             });
         }
 
-
-        // POST: /auth/login
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
@@ -44,8 +46,14 @@ namespace EficiaBackend.Controllers
 
             return Ok(new
             {
-                message = "Inicio de sesión exitoso",
-                token = result.Token
+                message = result.Message,
+                token = result.Token,
+                user = new
+                {
+                    id = result.UserId,
+                    name = result.Name,
+                    email = result.Email
+                }
             });
         }
     }
