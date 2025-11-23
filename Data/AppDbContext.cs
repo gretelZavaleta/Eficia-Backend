@@ -17,7 +17,6 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configuración para guardar el Enum como texto (opcional pero recomendado)
         modelBuilder.Entity<TaskItem>()
             .Property(t => t.Priority)
             .HasConversion<string>();
