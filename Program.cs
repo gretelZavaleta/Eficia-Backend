@@ -1,10 +1,18 @@
+using EficiaBackend.Data; // Importante el using
+using Microsoft.EntityFrameworkCore; // Importante el using
+
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString))
+);
 
 var app = builder.Build();
 
@@ -25,3 +33,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
