@@ -1,10 +1,9 @@
-using System.Threading.Tasks;
-using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 using EficiaBackend.Data;
 using EficiaBackend.DTOs.Auth;
 using EficiaBackend.Models;
 using EficiaBackend.Services.Interfaces;
+
 
 namespace EficiaBackend.Services
 {

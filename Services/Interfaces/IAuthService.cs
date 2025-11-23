@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using EficiaBackend.DTOs.Auth;
-using EficiaBackend.Models;
 
-namespace EficiaBackend.Services.Interfaces;
+namespace EficiaBackend.Services.Interfaces
 {
     public interface IAuthService
     {

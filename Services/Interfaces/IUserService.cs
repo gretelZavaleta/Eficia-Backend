@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using EficiaBackend.Models;
 using EficiaBackend.DTOs.Users;
 
