@@ -9,13 +9,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // ===== DATABASE =====
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString))
+);
+
 
 // ===== CONTROLLERS & OPENAPI =====
 builder.Services.AddControllers();
@@ -26,6 +27,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+
+builder.Services.AddScoped<INoteRepository,NoteRepository>();
+builder.Services.AddScoped<INoteService,NoteService>();
 
 // ===== JWT CONFIGURATION =====
 var jwtSettings = builder.Configuration.GetSection("Jwt");

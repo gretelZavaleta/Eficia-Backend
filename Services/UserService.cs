@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using EficiaBackend.Models;
 using EficiaBackend.DTOs.Users;
 using EficiaBackend.Repositories.Interfaces;
 using EficiaBackend.Services.Interfaces;
-using BCrypt.Net;
 
 namespace EficiaBackend.Services
 {
