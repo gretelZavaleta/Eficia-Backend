@@ -71,5 +71,16 @@ namespace EficiaBackend.Repositories
                                  .Where(t => t.UserId == userId) // Filtra por usuario
                                  .ToListAsync();
         }
+        public async Task<IEnumerable<TaskItem>> GetTasksByStatusAsync(int userId,bool isCompleted)
+        {
+            var query = _context.Tasks.Where(t => t.UserId == userId && t.Completed == isCompleted);
+
+            // Si es Historial (Completadas), ordenamos por fecha de término (lo más nuevo arriba)
+            if (isCompleted)
+                return await query.OrderByDescending(t => t.CompletedAt).ToListAsync();
+
+            // Si es Pendiente, ordenamos por urgencia (DueDate) o creación
+            return await query.OrderBy(t => t.DueDate).ToListAsync();
+        }
     }
 }

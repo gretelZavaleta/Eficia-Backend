@@ -11,5 +11,7 @@ namespace EficiaBackend.Services.Interfaces
         Task<TaskDto?> UpdateTaskAsync(int id, UpdateTaskDto updateTaskDto);
         Task<bool> DeleteTaskAsync(int id);
         Task<TaskDto?> MarkAsCompletedAsync(int id, bool completed);
+        Task<IEnumerable<TaskDto>> GetPendingTasksAsync(int userId);
+        Task<IEnumerable<TaskDto>> GetHistoryTasksAsync(int userId);
     }
 }
