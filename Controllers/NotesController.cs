@@ -36,5 +36,25 @@ namespace EficiaBackend.Controllers
             var createdNote = await _noteService.Create(createNoteDto);
             return CreatedAtAction(nameof(Show), new { id = createdNote.Id }, createdNote);
         }
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<NoteDto>> Update(int id,UpdateNoteDto updateNoteDto)
+        {
+            var updatedNote = await _noteService.Update(id, updateNoteDto);
+            if (updatedNote == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedNote);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _noteService.Delete(id);
+            if (!deleted)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }
