@@ -1,5 +1,9 @@
-using EficiaBackend.Data; // Importante el using
-using Microsoft.EntityFrameworkCore; // Importante el using
+using EficiaBackend.Data; 
+using EficiaBackend.Repositories;
+using EficiaBackend.Repositories.Interfaces;
+using EficiaBackend.Services;
+using EficiaBackend.Services.Interfaces;
+using Microsoft.EntityFrameworkCore; 
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +17,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString))
 );
+builder.Services.AddScoped<INoteRepository,NoteRepository>();
+builder.Services.AddScoped<INoteService,NoteService>();
 
 var app = builder.Build();
 
