@@ -23,18 +23,24 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // ===== DEPENDENCY INJECTION =====
+
+// Register User dependencies
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 
-// notes Services
+// Register Note dependencies
 builder.Services.AddScoped<INoteRepository,NoteRepository>();
 builder.Services.AddScoped<INoteService,NoteService>();
 //statistics Services
 builder.Services.AddScoped<IUserStatsRepository,UserStatsRepository>();
 builder.Services.AddScoped<IUserStatsService,UserStatsService>();
 
+
+// Register Task dependencies
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 // ===== JWT CONFIGURATION =====
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -80,7 +86,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication(); 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
