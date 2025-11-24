@@ -110,5 +110,41 @@ namespace EficiaBackend.Services
                 UpdatedAt = task.UpdatedAt
             };
         }
+        public async Task<IEnumerable<TaskDto>> GetPendingTasksAsync(int userId)
+        {
+            // Pedimos al repo las NO completadas (false)
+            var tasks = await _taskRepository.GetTasksByStatusAsync(userId,false);
+
+            // Mapeo rápido a DTO
+            return tasks.Select(t => new TaskDto
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                DueDate = t.DueDate,
+                Completed = t.Completed,
+                Priority = t.Priority // Asumiendo que tienes Priority en el DTO
+            });
+        }
+
+        public async Task<IEnumerable<TaskDto>> GetHistoryTasksAsync(int userId)
+        {
+            // Pedimos al repo las completadas (true)
+            var tasks = await _taskRepository.GetTasksByStatusAsync(userId,true);
+
+            return tasks.Select(t => new TaskDto
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                DueDate = t.DueDate,
+                Completed = t.Completed,
+                CompletedAt = t.CompletedAt
+            });
+        }
+
+
+
     }
+         
 }
