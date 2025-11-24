@@ -45,4 +45,5 @@ project.assets.json
 # o incluir el .Development.json y simplemente tener cuidado.
 # Si tienes un archivo que **solo** contiene secretos, ignóralo.
 # Ejemplo:
-# appsettings.Development.json
+
+appsettings.Development.json
