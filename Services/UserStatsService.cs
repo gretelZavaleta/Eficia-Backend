@@ -44,11 +44,8 @@ namespace EficiaBackend.Services
 
         public async Task UpdateStatsCalculationsAsync(int userId)
         {
-            // 3. OJO AQUÍ: Verifica si tu compañera llamó al método GetByIdAsync o GetTasksByUserIdAsync
-            // GetById suele traer UNO solo. Tú necesitas la LISTA. 
-            // Asumiré que es GetTasksByUserIdAsync por el contexto anterior.
+
             var allTasks = await _taskRepository.GetTasksByUserIdAsync(userId);
-            // 4. CORREGIDO: .Where con Mayúscula
             var finishedTasks = allTasks.Where(t => t.Completed && t.CompletedAt.HasValue).ToList();
 
             // Calcular Estadísticas reales
