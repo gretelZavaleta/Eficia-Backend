@@ -27,6 +27,10 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 
+
+builder.Services.AddScoped<IUserStatsRepository,UserStatsRepository>();
+builder.Services.AddScoped<IUserStatsService,UserStatsService>();
+
 // ===== JWT CONFIGURATION =====
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = jwtSettings["Key"];
