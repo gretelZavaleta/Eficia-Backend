@@ -15,5 +15,17 @@ namespace EficiaBackend.Repositories
         {
             return await _context.UserStats.FindAsync(userId);
         }
+
+        public async Task AddStatsAsync(UserStats stats)
+        {
+            await _context.UserStats.AddAsync(stats);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateStatsAsync(UserStats stats)
+        {
+            _context.UserStats.Update(stats);
+            await _context.SaveChangesAsync();
+        }
     }
 }
