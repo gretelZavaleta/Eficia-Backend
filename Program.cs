@@ -28,8 +28,14 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 
+<<<<<<< HEAD
 builder.Services.AddScoped<INoteRepository,NoteRepository>();
 builder.Services.AddScoped<INoteService,NoteService>();
+=======
+
+builder.Services.AddScoped<IUserStatsRepository,UserStatsRepository>();
+builder.Services.AddScoped<IUserStatsService,UserStatsService>();
+>>>>>>> origin/feature/statistics
 
 // ===== JWT CONFIGURATION =====
 var jwtSettings = builder.Configuration.GetSection("Jwt");
