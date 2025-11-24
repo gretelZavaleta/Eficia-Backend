@@ -64,5 +64,12 @@ namespace EficiaBackend.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(int userId)
+        {
+            return await _context.Tasks
+                                 .Where(t => t.UserId == userId) // Filtra por usuario
+                                 .ToListAsync();
+        }
     }
 }
