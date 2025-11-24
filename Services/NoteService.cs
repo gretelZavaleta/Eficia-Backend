@@ -1,4 +1,5 @@
 ﻿using EficiaBackend.Dtos.Notes;
+using EficiaBackend.Models;
 using EficiaBackend.Repositories.Interfaces;
 using EficiaBackend.Services.Interfaces;
 using System.Linq;
@@ -13,26 +14,86 @@ namespace EficiaBackend.Services
         }
         public async Task<IEnumerable<NoteDto>> GetAll()
         {
-            await _Repository.GetNotesAsync();
-                   
+            var notes = await _Repository.GetNotesAsync();
+            return notes.Select(n => new NoteDto
+            {
+                Id = n.Id,
+                Title = n.Title,
+                Content = n.Content,
+                IsArchived = n.IsArchived,
+                CreatedAt = n.CreatedAt
+            });
+
         }
-        public Task<NoteDto?> GetById(int id)
+        public async Task<NoteDto?> GetById(int id)
         {
-            throw new NotImplementedException();
+            var note = await _Repository.GetNoteByIdAsync(id);
+            return note == null
+                ? null
+                : new NoteDto
+                {
+                    Id = note.Id,
+                    Title = note.Title,
+                    Content = note.Content,
+                    IsArchived = note.IsArchived,
+                    CreatedAt = note.CreatedAt
+                };
+
+
+
         }
-        public Task<NoteDto> Create(CreateNoteDto createNoteDto)
+        public async Task<NoteDto> Create(CreateNoteDto createNoteDto)
         {
-            throw new NotImplementedException();
+            var newNote = new Note()
+            {
+                Title = createNoteDto.Title,
+                Content = createNoteDto.Content,
+                UserId = createNoteDto.UserId,
+                IsArchived = false,
+            }; 
+           var saveNote =  await _Repository.CreateNoteAsync(newNote);
+           var newNoteDto = new NoteDto()
+           {
+               Id = saveNote.Id,
+               Title = saveNote.Title,
+               Content = saveNote.Content,
+               IsArchived = saveNote.IsArchived,
+               CreatedAt = saveNote.CreatedAt
+           };
+            return newNoteDto;
+
         }
 
-        public Task<NoteDto?> Update(int id,UpdateNoteDto updateNoteDto)
+        public async Task<NoteDto?> Update(int id,UpdateNoteDto updateNoteDto)
         {
-            throw new NotImplementedException();
+            var existingNote = await _Repository.GetNoteByIdAsync(id);
+
+            if (existingNote is { })
+            {
+                if (updateNoteDto.Title != null) existingNote.Title = updateNoteDto.Title;
+                if (updateNoteDto.Content != null) existingNote.Content = updateNoteDto.Content;
+                if (updateNoteDto.IsArchived != null) existingNote.IsArchived = updateNoteDto.IsArchived.Value;
+
+                existingNote.UpdatedAt = DateTime.UtcNow;
+
+                await _Repository.UpdateNoteAsync(existingNote);
+
+                return new NoteDto
+                {
+                    Id = existingNote.Id,
+                    Title = existingNote.Title,
+                    Content = existingNote.Content,
+                    IsArchived = existingNote.IsArchived,
+                    CreatedAt = existingNote.CreatedAt
+                };
+            }
+
+            return null;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            return await _Repository.DeleteNoteAsync(id);
         }
 
 
