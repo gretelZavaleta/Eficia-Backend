@@ -10,5 +10,6 @@ namespace EficiaBackend.Repositories.Interfaces
         Task<TaskItem> CreateAsync(TaskItem task);
         Task<TaskItem?> UpdateAsync(TaskItem task);
         Task<bool> DeleteAsync(int id);
+        Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(int userId);
     }
 }
