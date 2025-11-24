@@ -64,5 +64,21 @@ namespace EficiaBackend.Controllers
             }
             return NoContent();
         }
+
+        [HttpGet("pending/{userId}")]
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetPending(int userId)
+        {
+            var tasks = await _taskService.GetPendingTasksAsync(userId);
+            return Ok(tasks);
+        }
+
+        [HttpGet("history/{userId}")]
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetHistory(int userId)
+        {
+            var tasks = await _taskService.GetHistoryTasksAsync(userId);
+            return Ok(tasks);
+        }
+
+
     }
 }
